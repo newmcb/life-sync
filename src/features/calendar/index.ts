@@ -1,2 +1,2 @@
-export {default as Calendar} from './ui/Calendar'
+export {default as CalendarFeature} from './ui/CalendarFeature'
 export {default as CalendarList} from './ui/CalendarList'

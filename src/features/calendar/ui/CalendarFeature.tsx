@@ -7,7 +7,7 @@ const CalendarFeature = () => {
   const [selectDay, setSelectDay] = useState<string | undefined>();
 
   return (
-    <div className={'w-full px-5 max-w-5xl mx-auto box-border gap-24 flex'}>
+    <div className={'px-5 max-w-5xl box-border gap-24 flex'}>
       <div className={'max-w-2xl'}>
         <CalendarUi setSelectDay={setSelectDay}/>
         {/*CalendarComponent*/}

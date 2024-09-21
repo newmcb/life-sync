@@ -1,1 +1,1 @@
-export {MemoList} from '@/src/features/memo'
+export {Memo} from '@/src/features/memo'

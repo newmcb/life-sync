@@ -1,9 +1,9 @@
 import React from 'react';
-import {Calendar} from '@/src/views/calendar'
+import {CalendarView} from "@/src/views/calendar";
 
 const CalendarRouterPage = () => {
   return (
-    <Calendar/>
+    <CalendarView/>
   );
 };
 

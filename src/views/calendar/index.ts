@@ -1,1 +1,1 @@
-export { Calendar } from '@/src/features/calendar'
+export { default as CalendarView } from './ui/CalenderView'
