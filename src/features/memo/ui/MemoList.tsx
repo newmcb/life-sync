@@ -25,7 +25,7 @@ const MemoList:FC<MemoListProps> = ({posts}) => {
                 </thead>
                 <tbody>
                 {initialPosts.map((post) => (
-                    <tr key={post.id}>
+                    <tr key={post.id} className="hover:bg-gray-100">
                         <td className="py-2 px-4 border-b border-gray-200 hover:cursor-pointer hover:text-blue-700 hover:underline">{post.name}</td>
                         <td className="py-2 px-4 border-b border-gray-200">{post.type}</td>
                         <td className="py-2 px-4 border-b border-gray-200">{post.accessLevel}</td>

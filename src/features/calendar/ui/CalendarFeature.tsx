@@ -1,10 +1,20 @@
 'use client'
 
-import React, {useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {CalendarUi} from "@/src/entities/calendar";
 
-const CalendarFeature = () => {
+interface CalendarFeatureProps{
+  setDay:React.Dispatch<React.SetStateAction<string | undefined>>;
+}
+
+const CalendarFeature:FC<CalendarFeatureProps> = ({setDay}) => {
   const [selectDay, setSelectDay] = useState<string | undefined>();
+
+  useEffect(()=>{
+    if(selectDay){
+      setDay(selectDay)
+    }
+  },[selectDay])
 
   return (
     <div className={'px-5 max-w-5xl box-border gap-24 flex'}>

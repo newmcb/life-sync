@@ -1,0 +1,42 @@
+export const TEST_DATA = [
+  {
+    day: "2025-01-20",
+    section1: "식비",
+    section2: "식자재",
+    section3: "이마트",
+    amount: 30000,
+    memo: "과일, 채소",
+  },
+  {
+    day: "2025-01-24",
+    section1: "식비",
+    section2: "식자재",
+    section3: "이마트",
+    amount: 30000,
+    memo: "음료",
+  },
+  {
+    day: "2025-01-24",
+    section1: "수입",
+    section2: "월급",
+    section3: "남편월급",
+    amount: 1000000,
+    memo: "",
+  },
+  {
+    day: "2025-01-24",
+    section1: "수입",
+    section2: "월급",
+    section3: "아내월급",
+    amount: 10000000,
+    memo: "",
+  },
+  {
+    day: "2025-01-26",
+    section1: "수입",
+    section2: "부수입",
+    section3: "부수입",
+    amount: 10000,
+    memo: "",
+  },
+];
