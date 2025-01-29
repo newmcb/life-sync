@@ -3,7 +3,10 @@ import Calendar from "react-calendar";
 import dayjs from "dayjs";
 import "react-calendar/dist/Calendar.css";
 import CalendarDayInfo from "@/src/entities/calendar/ui/CalendarDayInfo";
-import { TEST_DATA } from "@/src/entities/calendar/model/CalendarModel";
+import {
+  INCOME_DATA,
+  SPEND_DATA,
+} from "@/src/entities/calendar/model/CalendarModel";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -15,6 +18,8 @@ const CalendarUi: FC<CalendarUiProps> = ({ setSelectDay }) => {
   const today = new Date();
   const [calendarValue, setCalendarValue] = useState<Value>(today);
 
+  const totalData = [...SPEND_DATA, ...INCOME_DATA];
+
   useEffect(() => {
     setSelectDay(String(calendarValue));
   }, [calendarValue]);
@@ -25,7 +30,7 @@ const CalendarUi: FC<CalendarUiProps> = ({ setSelectDay }) => {
     dayjs(date).format("YYYY.MM");
 
   const renderTileContent = ({ date }: { date: Date }) => {
-    const data = TEST_DATA.filter(
+    const data = totalData.filter(
       (entry) => entry.day === dayjs(date).format("YYYY-MM-DD"),
     );
 

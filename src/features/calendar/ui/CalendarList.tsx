@@ -1,16 +1,44 @@
-import React, { useCallback } from "react";
-import { TEST_DATA } from "@/src/entities/calendar/model/CalendarModel";
+import React, { FC, useCallback, useEffect, useState } from "react";
+import {
+  INCOME_DATA,
+  SPEND_DATA,
+  TEST_DATA,
+} from "@/src/entities/calendar/model/CalendarModel";
 import {
   CATEGORY_SAVING,
   CATEGORY_SPEND,
 } from "@/src/features/calendar/model/CalendarModel";
+import dayjs from "dayjs";
 
-const CalendarList: React.FC = () => {
+interface CalendarListProps {
+  selectDay?: string;
+}
+
+const CalendarList: FC<CalendarListProps> = ({ selectDay }) => {
+  const [today, setToday] = useState<string>("");
+
+  const sampleData = [...SPEND_DATA, ...INCOME_DATA];
+
   const getAmountColor = useCallback((section1: string) => {
     if (CATEGORY_SPEND[section1]) return "text-blue-500";
     if (CATEGORY_SAVING[section1]) return "text-red-500";
     return "text-gray-700";
   }, []);
+
+  const getRowClassName = useCallback(
+    (itemDay: string, index: number) => {
+      if (itemDay === today) return "bg-yellow-100";
+      return index % 2 === 0 ? "bg-white" : "bg-gray-50";
+    },
+    [today],
+  );
+
+  useEffect(() => {
+    if (selectDay) {
+      const day = dayjs(selectDay).format("YYYY-MM-DD");
+      setToday(day);
+    }
+  }, [selectDay]);
 
   return (
     <div className="container mx-auto p-6">
@@ -31,12 +59,10 @@ const CalendarList: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {TEST_DATA.map((item, index) => (
+            {sampleData.map((item, index) => (
               <tr
                 key={index}
-                className={`${
-                  index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                } hover:bg-blue-50 transition`}
+                className={`${getRowClassName(item.day, index)} hover:bg-blue-50 transition`}
               >
                 <td className="px-4 py-2 border-b text-gray-700">{item.day}</td>
                 <td className="px-4 py-2 border-b text-gray-700">

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Bar } from 'react-chartjs-2';
+import React, { FC, useEffect, useState } from "react";
+import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,9 +9,13 @@ import {
   Tooltip,
   Legend,
   ChartOptions,
-} from 'chart.js';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
-import {CATEGORY_SAVING} from "@/src/features/calendar/model/CalendarModel";
+} from "chart.js";
+import ChartDataLabels from "chartjs-plugin-datalabels";
+import {
+  DataItem,
+  INCOME_DATA,
+  SPEND_DATA,
+} from "@/src/entities/calendar/model/CalendarModel";
 
 ChartJS.register(
   CategoryScale,
@@ -20,58 +24,82 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ChartDataLabels
+  ChartDataLabels,
 );
 
-const BarChart: React.FC = () => {
+interface BarChartProps {
+  chartType?: "s" | "i"; //spending, income
+}
 
-  const category = CATEGORY_SAVING['수입'];
+const BarChart: FC<BarChartProps> = ({ chartType }) => {
+  // Grouping data by section1 and summing amounts
 
+  const [chartData, setChartData] = useState<DataItem[]>(SPEND_DATA);
+
+  useEffect(() => {
+    if (chartType) {
+      chartType === "i" ? setChartData(INCOME_DATA) : setChartData(SPEND_DATA);
+    }
+  }, [chartType]);
+
+  const groupedData = chartData.reduce(
+    (acc, item) => {
+      if (!acc[item.section1]) {
+        acc[item.section1] = 0;
+      }
+      acc[item.section1] += item.amount;
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
+
+  const labels = Object.keys(groupedData);
+  const amounts = Object.values(groupedData);
 
   const data = {
-    labels: category,
+    labels: labels, // Categories from TEST_DATA
     datasets: [
       {
-        label: 'Dataset 1',
-        data: [30000, 10000, 0, 0], // 금액 데이터
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
+        label: "금액", // Dataset label
+        data: amounts, // Summed amounts
+        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        borderColor: "rgba(75, 192, 192, 1)",
         borderWidth: 1,
       },
     ],
   };
 
   // 100% 기준 값을 설정
-  const maxValue = 500000; // 수동으로 100% 기준 값 설정
+  const totalAmount = amounts.reduce((sum, value) => sum + value, 0);
 
-  const options: ChartOptions<'bar'> = {
-    indexAxis: 'y', // 가로형 막대 그래프
-    layout:{
-      padding:{
-        top:20,
+  const options: ChartOptions<"bar"> = {
+    indexAxis: "y", // 가로형 막대 그래프
+    layout: {
+      padding: {
+        top: 20,
         bottom: 20,
         left: 20,
         right: 100,
-      }
+      },
     },
     responsive: true,
     plugins: {
       legend: {
-        position: 'top', // 범례 위치
+        position: "top", // 범례 위치
       },
       title: {
-        display: true,
-        text: 'Horizontal Bar Chart with Fixed Labels',
+        display: false,
+        text: "Horizontal Bar Chart with TEST_DATA",
       },
       datalabels: {
-        align: 'end', // 데이터 라벨을 그래프의 끝에 정렬
-        anchor: 'end', // 항상 우측 끝에 고정
+        align: "end", // 데이터 라벨을 그래프의 끝에 정렬
+        anchor: "end", // 항상 우측 끝에 고정
         formatter: (value: number) => {
-          const percentage = ((value / maxValue) * 100).toFixed(1); // 100% 기준 값 기반 퍼센트 계산
-          return `${value.toLocaleString()} (${percentage}%)`; // 금액과 퍼센트 표시
+          const percentage = ((value / totalAmount) * 100).toFixed(1);
+          return `${value.toLocaleString()} (${percentage}%)`;
         },
         clip: false, // 라벨이 그래프 영역 밖으로 넘어갈 수 있도록 허용
-        color: '#000', // 라벨 색상
+        color: "#000", // 라벨 색상
         font: {
           size: 12, // 폰트 크기
         },
@@ -92,7 +120,7 @@ const BarChart: React.FC = () => {
   };
 
   return (
-    <div style={{ width: '100%', overflowX: 'auto' }}>
+    <div style={{ width: "100%", overflowX: "auto" }}>
       <Bar data={data} options={options} />
     </div>
   );
