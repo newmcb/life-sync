@@ -14,7 +14,6 @@ interface CalendarDayInfoProps {
 const CalendarDayInfo: FC<CalendarDayInfoProps> = ({ data }) => {
   useEffect(() => {
     if (data) {
-      console.log(">>> data", data);
     }
   }, [data]);
 

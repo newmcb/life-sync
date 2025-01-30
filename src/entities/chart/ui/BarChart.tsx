@@ -28,19 +28,17 @@ ChartJS.register(
 );
 
 interface BarChartProps {
-  chartType?: "s" | "i"; //spending, income
+  detailType?: "s" | "i"; //spending, income
 }
 
-const BarChart: FC<BarChartProps> = ({ chartType }) => {
-  // Grouping data by section1 and summing amounts
-
+const BarChart: FC<BarChartProps> = ({ detailType }) => {
   const [chartData, setChartData] = useState<DataItem[]>(SPEND_DATA);
 
   useEffect(() => {
-    if (chartType) {
-      chartType === "i" ? setChartData(INCOME_DATA) : setChartData(SPEND_DATA);
+    if (detailType) {
+      detailType === "i" ? setChartData(INCOME_DATA) : setChartData(SPEND_DATA);
     }
-  }, [chartType]);
+  }, [detailType]);
 
   const groupedData = chartData.reduce(
     (acc, item) => {
@@ -57,11 +55,11 @@ const BarChart: FC<BarChartProps> = ({ chartType }) => {
   const amounts = Object.values(groupedData);
 
   const data = {
-    labels: labels, // Categories from TEST_DATA
+    labels: labels,
     datasets: [
       {
-        label: "금액", // Dataset label
-        data: amounts, // Summed amounts
+        label: "금액",
+        data: amounts,
         backgroundColor: "rgba(75, 192, 192, 0.2)",
         borderColor: "rgba(75, 192, 192, 1)",
         borderWidth: 1,
@@ -89,7 +87,7 @@ const BarChart: FC<BarChartProps> = ({ chartType }) => {
       },
       title: {
         display: false,
-        text: "Horizontal Bar Chart with TEST_DATA",
+        text: "",
       },
       datalabels: {
         align: "end", // 데이터 라벨을 그래프의 끝에 정렬
