@@ -40,12 +40,15 @@ const BarChart: FC<BarChartProps> = ({ detailType }) => {
     }
   }, [detailType]);
 
+  const groupByField = detailType === "i" ? "section2" : "section1";
+
   const groupedData = chartData.reduce(
     (acc, item) => {
-      if (!acc[item.section1]) {
-        acc[item.section1] = 0;
+      const key = item[groupByField as keyof typeof item];
+      if (!acc[key]) {
+        acc[key] = 0;
       }
-      acc[item.section1] += item.amount;
+      acc[key] += item.amount;
       return acc;
     },
     {} as Record<string, number>,
