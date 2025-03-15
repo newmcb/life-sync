@@ -18,7 +18,7 @@
 
 /* react-calendar css */
 .react-calendar {
-  width: 100% !important;
+  width: 40rem !important;
   border: none;
   border-radius: 0.5rem;
   box-shadow: 4px 2px 10px 0px rgba(0, 0, 0, 0.13);

@@ -26,7 +26,7 @@ const CalendarAdd = () => {
   };
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg shadow-md p-6 max-w-xl mx-auto">
+    <div className="bg-white border border-gray-200 rounded-lg shadow-md p-6 w-full mx-auto">
       <h2 className="text-lg font-semibold text-gray-800 mb-4">장부 추가</h2>
 
       <form className="space-y-4">
