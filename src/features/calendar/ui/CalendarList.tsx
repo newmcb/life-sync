@@ -1,12 +1,12 @@
 import React, { FC, useCallback, useEffect, useState } from "react";
 import {
   INCOME_DATA,
-  SPEND_DATA,
+  EXPENSE_DATA,
   TEST_DATA,
 } from "@/src/entities/calendar/model/CalendarModel";
 import {
-  CATEGORY_SAVING,
-  CATEGORY_SPEND,
+  CATEGORY_INCOME,
+  CATEGORY_EXPENSE,
 } from "@/src/features/calendar/model/CalendarModel";
 import dayjs from "dayjs";
 
@@ -17,11 +17,11 @@ interface CalendarListProps {
 const CalendarList: FC<CalendarListProps> = ({ selectDay }) => {
   const [today, setToday] = useState<string>("");
 
-  const sampleData = [...SPEND_DATA, ...INCOME_DATA];
+  const sampleData = [...EXPENSE_DATA, ...INCOME_DATA];
 
   const getAmountColor = useCallback((section1: string) => {
-    if (CATEGORY_SPEND[section1]) return "text-blue-500";
-    if (CATEGORY_SAVING[section1]) return "text-red-500";
+    if (CATEGORY_EXPENSE[section1]) return "text-blue-500";
+    if (CATEGORY_INCOME[section1]) return "text-red-500";
     return "text-gray-700";
   }, []);
 

@@ -6,16 +6,15 @@ import ReactQueryProvider from "./ReactQueryProvider";
 import { LayoutHeader } from "@/src/widgets/layoutHeader";
 import { LayoutContents } from "@/src/widgets/layoutContents";
 import { LayoutSidebar } from "@/src/widgets/layoutSidebar";
-import { SidebarMenuKeys } from "@/src/widgets/layoutSidebar/model/sidebar";
 
 interface AppIndexProps {
   children: ReactNode;
 }
 
 const AppIndex: FC<AppIndexProps> = ({ children }) => {
-  const [selectHeader, setSelectHeader] = useState<SidebarMenuKeys>();
+  const [selectHeader, setSelectHeader] = useState<string>();
 
-  const handleHeaderSelection = (header: SidebarMenuKeys) => {
+  const handleHeaderSelection = (header: string) => {
     setSelectHeader(header);
   };
 

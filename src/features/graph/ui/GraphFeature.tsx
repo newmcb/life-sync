@@ -17,12 +17,7 @@ const GraphFeature = () => {
     { month: "12월", saving: 1100, spending: 1000, lineValue: 800 },
   ];
 
-  return (
-    <div>
-      <h1>D3.js Bar + Line Chart in Next.js</h1>
-      <BarChart data={chartData} width={700} height={400} />
-    </div>
-  );
+  return <BarChart data={chartData} width={700} height={400} />;
 };
 
 export default GraphFeature;

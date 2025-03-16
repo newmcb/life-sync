@@ -18,10 +18,22 @@ export const SIDEBAR_MENU: SidebarType = {
       route: "/calendar",
     },
     {
-      name: "graph",
+      name: "yearEndClosing",
       code: "c2",
-      ko: "그래프",
-      route: "/calendar/graph",
+      ko: "연말결산",
+      route: "/calendar/summary",
+    },
+    {
+      name: "householdAssets",
+      code: "c3",
+      ko: "자산현황",
+      route: "/calendar/assets",
+    },
+    {
+      name: "setting",
+      code: "c4",
+      ko: "항목 관리",
+      route: "/calendar",
     },
   ],
   promise: [

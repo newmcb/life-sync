@@ -1,7 +1,5 @@
-import { SidebarMenuKeys } from "@/src/widgets/layoutSidebar/model/sidebar";
-
 export const headerData: {
-  key: SidebarMenuKeys;
+  key: string;
   to: string;
   ko: string;
 }[] = [

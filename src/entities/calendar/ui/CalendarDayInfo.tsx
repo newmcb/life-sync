@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from "react";
 import {
-  CATEGORY_SAVING,
-  CATEGORY_SPEND,
+  CATEGORY_INCOME,
+  CATEGORY_EXPENSE,
 } from "@/src/features/calendar/model/CalendarModel";
 
 interface CalendarDayInfoProps {
@@ -19,11 +19,11 @@ const CalendarDayInfo: FC<CalendarDayInfoProps> = ({ data }) => {
 
   const calculateTotals = () => {
     const spendTotal = data
-      .filter((item) => CATEGORY_SPEND[item.section1])
+      .filter((item) => CATEGORY_EXPENSE[item.section1])
       .reduce((sum, item) => sum + item.amount, 0);
 
     const savingTotal = data
-      .filter((item) => CATEGORY_SAVING[item.section1])
+      .filter((item) => CATEGORY_INCOME[item.section1])
       .reduce((sum, item) => sum + item.amount, 0);
 
     return { spendTotal, savingTotal };

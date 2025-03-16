@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CATEGORY_SPEND } from "@/src/features/calendar/model/CalendarModel";
+import { CATEGORY_EXPENSE } from "@/src/features/calendar/model/CalendarModel";
 import Button from "@/src/shared/ui/Button";
 
 const CalendarAdd = () => {
@@ -43,7 +43,7 @@ const CalendarAdd = () => {
             <option value="" disabled>
               대분류를 선택하세요
             </option>
-            {Object.keys(CATEGORY_SPEND).map((category) => (
+            {Object.keys(CATEGORY_EXPENSE).map((category) => (
               <option key={category} value={category}>
                 {category}
               </option>
@@ -66,7 +66,7 @@ const CalendarAdd = () => {
               중분류를 선택하세요
             </option>
             {selectedCategory &&
-              CATEGORY_SPEND[selectedCategory].map((subCategory) => (
+              CATEGORY_EXPENSE[selectedCategory].map((subCategory) => (
                 <option key={subCategory} value={subCategory}>
                   {subCategory}
                 </option>

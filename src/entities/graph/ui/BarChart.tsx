@@ -89,8 +89,8 @@ const AnimatedGroupedBarLineChart: FC<AnimatedGroupedBarLineChartProps> = ({
     barGroups
       .selectAll("rect")
       .data((d) => [
-        { key: "saving", value: d.saving, color: "steelblue" },
-        { key: "spending", value: d.spending, color: "orange" },
+        { key: "saving", value: d.saving, color: "#9333EA" },
+        { key: "spending", value: d.spending, color: "#4F46E5" },
       ])
       .enter()
       .append("rect")
@@ -145,6 +145,42 @@ const AnimatedGroupedBarLineChart: FC<AnimatedGroupedBarLineChartProps> = ({
       .duration(800)
       .attr("cy", (d) => yScale(d.lineValue))
       .attr("r", 4);
+
+    // ✅ **범례(Legend) 추가**
+    // const legendGroup = svg
+    //   .append("g")
+    //   .attr("transform", `translate(${width - 160}, 20)`); // 우측 상단 배치
+
+    const legendData = [
+      { label: "수입", color: "#9333EA" },
+      { label: "지출", color: "#4F46E5" },
+      { label: "저축률", color: "red" },
+    ];
+
+    const legendWidth = legendData.length * 100; // 각 항목 100px 간격
+    const legendGroup = svg
+      .append("g")
+      .attr("transform", `translate(${(width - legendWidth) / 2}, 10)`); // ✅ 중앙 정렬
+
+    legendGroup
+      .selectAll(".legend")
+      .data(legendData)
+      .enter()
+      .append("g")
+      .attr("class", "legend")
+      .attr("transform", (_, i) => `translate(${i * 100}, 0)`) // ✅ 가로 정렬
+      .each(function (d) {
+        const g = d3.select(this);
+        g.append("rect")
+          .attr("width", 12)
+          .attr("height", 12)
+          .attr("fill", d.color);
+        g.append("text")
+          .attr("x", 18)
+          .attr("y", 10)
+          .attr("font-size", "12px")
+          .text(d.label);
+      });
   }, [data, width, height]);
 
   return <svg ref={svgRef} width={width} height={height} />;

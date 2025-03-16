@@ -44,7 +44,7 @@ export const INCOME_DATA: DataItem[] = [
   },
 ];
 
-export const SPEND_DATA: DataItem[] = [
+export const EXPENSE_DATA: DataItem[] = [
   {
     day: "2025-01-20",
     section1: "식비",

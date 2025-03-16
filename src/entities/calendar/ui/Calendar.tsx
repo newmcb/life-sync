@@ -5,7 +5,7 @@ import "react-calendar/dist/Calendar.css";
 import CalendarDayInfo from "@/src/entities/calendar/ui/CalendarDayInfo";
 import {
   INCOME_DATA,
-  SPEND_DATA,
+  EXPENSE_DATA,
 } from "@/src/entities/calendar/model/CalendarModel";
 
 type ValuePiece = Date | null;
@@ -18,7 +18,7 @@ const CalendarUi: FC<CalendarUiProps> = ({ setSelectDay }) => {
   const today = new Date();
   const [calendarValue, setCalendarValue] = useState<Value>(today);
 
-  const totalData = [...SPEND_DATA, ...INCOME_DATA];
+  const totalData = [...EXPENSE_DATA, ...INCOME_DATA];
 
   useEffect(() => {
     setSelectDay(String(calendarValue));

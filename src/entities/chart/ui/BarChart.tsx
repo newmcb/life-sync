@@ -14,7 +14,7 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 import {
   DataItem,
   INCOME_DATA,
-  SPEND_DATA,
+  EXPENSE_DATA,
 } from "@/src/entities/calendar/model/CalendarModel";
 
 ChartJS.register(
@@ -32,11 +32,13 @@ interface BarChartProps {
 }
 
 const BarChart: FC<BarChartProps> = ({ detailType }) => {
-  const [chartData, setChartData] = useState<DataItem[]>(SPEND_DATA);
+  const [chartData, setChartData] = useState<DataItem[]>(EXPENSE_DATA);
 
   useEffect(() => {
     if (detailType) {
-      detailType === "i" ? setChartData(INCOME_DATA) : setChartData(SPEND_DATA);
+      detailType === "i"
+        ? setChartData(INCOME_DATA)
+        : setChartData(EXPENSE_DATA);
     }
   }, [detailType]);
 

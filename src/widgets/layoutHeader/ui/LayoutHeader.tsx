@@ -1,16 +1,16 @@
 import React, { FC } from "react";
 import { useRouter } from "next/navigation";
 import { headerData } from "@/src/widgets/layoutHeader/model/header";
-import { SidebarMenuKeys } from "@/src/widgets/layoutSidebar/model/sidebar";
 
 interface LayoutHeaderProps {
-  onSelectionChange: (header: SidebarMenuKeys) => void; // 콜백 프로퍼티 추가
+  onSelectionChange: (header: string) => void; // 콜백 프로퍼티 추가
 }
 
 const LayoutHeader: FC<LayoutHeaderProps> = ({ onSelectionChange }) => {
   const router = useRouter();
 
   const handleRoute = (value: string) => {
+    console.log(">>> value", value);
     router.push(value);
   };
 
