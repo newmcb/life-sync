@@ -1,6 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --default-500: #6B7280;
+  --blue-500: #3B82F6;
+  --green-500: #10B981;
+  --purple-500: #8B5CF6;
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2 !important;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
+  }
+  
+  .btn-secondary {
+    @apply px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
+  }
+  
+  .input-primary {
+    @apply mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow p-6;
+  }
+}
+
 @font-face {
   font-family: "MaruBuri";
   font-weight: 200;
@@ -122,6 +154,137 @@
   border-radius: 0.3rem;
 }
 
+/* 기본 제목 스타일 제거 */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  outline: none;
+  overflow: hidden;
+}
+
+/* 기본 버튼 스타일 제거 */
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+/* 기본 입력 필드 스타일 제거 */
+input, select, textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+/* 기본 링크 스타일 제거 */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 기본 리스트 스타일 제거 */
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* 기본 테이블 스타일 제거 */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* 기본 이미지 스타일 제거 */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 기본 폼 요소 스타일 제거 */
+form {
+  margin: 0;
+  padding: 0;
+}
+
+/* 기본 필드셋 스타일 제거 */
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+/* 기본 레전드 스타일 제거 */
+legend {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+/* 기본 라디오 버튼과 체크박스 스타일 제거 */
+input[type="radio"],
+input[type="checkbox"] {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+}
+
+/* 기본 날짜 입력 필드 스타일 제거 */
+input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+/* 기본 숫자 입력 필드 스타일 제거 */
+input[type="number"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+/* 기본 셀렉트 박스 스타일 제거 */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+/* 기본 텍스트 영역 스타일 제거 */
+textarea {
+  resize: none;
+  overflow: auto;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+}
 
 /*@tailwind base;*/
 /*@tailwind components;*/

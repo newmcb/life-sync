@@ -1,9 +1,5 @@
-import Image from "next/image";
+import { LoginFormView } from "@/src/views/login";
 
 export default function Home() {
-  return (
-    <div>
-      main
-    </div>
-  );
+  return <LoginFormView />;
 }
