@@ -1,3 +1,11 @@
+import {
+  CalendarIcon,
+  CheckCircleIcon,
+  CurrencyDollarIcon,
+  HomeIcon,
+  LockClosedIcon,
+} from "@heroicons/react/24/outline";
+
 export interface SidebarItem {
   name: string;
   code: string;
@@ -10,6 +18,32 @@ interface SidebarType {
 }
 
 export const SIDEBAR_MENU: SidebarType = {
+  finance: [
+    {
+      name: "finance",
+      code: "f1",
+      ko: "재무 대시보드",
+      route: "/finance",
+    },
+    {
+      name: "finance",
+      code: "f2",
+      ko: "수입/지출 관리",
+      route: "/finance",
+    },
+    {
+      name: "finance",
+      code: "f3",
+      ko: "예산 설정",
+      route: "/finance",
+    },
+    {
+      name: "finance",
+      code: "f4",
+      ko: "재무 보고서",
+      route: "/finance",
+    },
+  ],
   calendar: [
     {
       name: "calendar",
@@ -65,3 +99,11 @@ export const SIDEBAR_MENU: SidebarType = {
     },
   ],
 };
+
+export const MENU_ITEM = [
+  { href: "/dashboard", label: "대시보드", icon: HomeIcon },
+  { href: "/calendar", label: "일정관리", icon: CalendarIcon },
+  { href: "/todo", label: "할일관리", icon: CheckCircleIcon },
+  { href: "/finance", label: "재무관리", icon: CurrencyDollarIcon },
+  { href: "/secret", label: "비밀공간", icon: LockClosedIcon },
+];

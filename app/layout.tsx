@@ -2,10 +2,10 @@
 
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Sidebar from "./components/Sidebar";
 import { usePathname } from "next/navigation";
 import { SessionProvider, useSession } from "next-auth/react";
 import { ReactNode, useEffect, useState } from "react";
+import { LayoutSidebar } from "@/src/widgets/layoutSidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -54,7 +54,7 @@ export default function RootLayout({
         <SessionProvider>
           <AuthCheck>
             <div className="flex min-h-screen bg-gray-50">
-              {!isLoginPage && <Sidebar />}
+              {!isLoginPage && <LayoutSidebar />}
               <main
                 className={`flex-1 ${!isLoginPage ? "md:ml-64" : ""} pt-16 md:pt-0`}
               >
