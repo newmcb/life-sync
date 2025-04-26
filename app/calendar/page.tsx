@@ -1,10 +1,8 @@
-import React from 'react';
-import {CalendarView} from "@/src/views/calendar";
+import React from "react";
+import { CalendarView } from "@/src/views/calendar";
 
-const CalendarRouterPage = () => {
-  return (
-    <CalendarView/>
-  );
+const CalendarPage = () => {
+  return <CalendarView />;
 };
 
-export default CalendarRouterPage;
+export default CalendarPage;

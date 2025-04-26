@@ -14,3 +14,5 @@ export const CATEGORY_EXPENSE: CategoryType = {
 };
 
 export const PAYMENT_METHODS = ["현금", "카드", "계좌 이체", "기타"];
+
+export type CalendarFilterType = "all" | "day" | "month" | "past";
