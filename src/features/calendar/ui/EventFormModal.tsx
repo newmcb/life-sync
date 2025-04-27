@@ -63,6 +63,7 @@ const EventFormModal: FC<EventFormModalProps> = ({
               </label>
               <input
                 type="date"
+                max={"9999-12-31"}
                 value={formData.date}
                 onChange={(e) =>
                   setFormData({ ...formData, date: e.target.value })
