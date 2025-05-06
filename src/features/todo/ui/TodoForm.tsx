@@ -5,6 +5,7 @@ import {
   Todo,
 } from "@/src/features/todo/model/TodoType";
 import dayjs from "dayjs";
+import BaseInput from "@/src/shared/ui/Input";
 
 interface TodoFormProps {
   visible: boolean;
@@ -57,13 +58,12 @@ const TodoForm: FC<TodoFormProps> = ({ visible, todo, onSave, onClose }) => {
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 제목
               </label>
-              <input
+              <BaseInput
                 type="text"
                 value={formData.title}
                 onChange={(e) =>
                   setFormData({ ...formData, title: e.target.value })
                 }
-                className="w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
                 placeholder="할일 제목"
               />
             </div>
@@ -71,14 +71,13 @@ const TodoForm: FC<TodoFormProps> = ({ visible, todo, onSave, onClose }) => {
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 마감일
               </label>
-              <input
+              <BaseInput
                 type="date"
                 max={"9999-12-31"}
                 value={formData.dueDate}
                 onChange={(e) =>
                   setFormData({ ...formData, dueDate: e.target.value })
                 }
-                className="w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
               />
             </div>
             <div>
@@ -112,7 +111,7 @@ const TodoForm: FC<TodoFormProps> = ({ visible, todo, onSave, onClose }) => {
                 onChange={(e) =>
                   setFormData({ ...formData, category: e.target.value })
                 }
-                className="w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+                className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:ring-inset"
               >
                 <option value="">카테고리 없음</option>
                 {categoryOptions.map((category) => (

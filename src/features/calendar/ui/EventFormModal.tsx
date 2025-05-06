@@ -3,6 +3,7 @@ import {
   CalendarEvent,
   colorOptions,
 } from "@/src/views/calendar/model/CalendarViewModel";
+import BaseInput from "@/src/shared/ui/Input";
 
 interface EventFormModalProps {
   visible: boolean;
@@ -47,13 +48,12 @@ const EventFormModal: FC<EventFormModalProps> = ({
               <label className="block text-sm font-medium text-gray-700">
                 제목
               </label>
-              <input
-                type="text"
+              <BaseInput
+                type={"text"}
                 value={formData.title}
                 onChange={(e) =>
                   setFormData({ ...formData, title: e.target.value })
                 }
-                className="w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500"
                 placeholder="일정 제목"
               />
             </div>
@@ -61,14 +61,13 @@ const EventFormModal: FC<EventFormModalProps> = ({
               <label className="block text-sm font-medium text-gray-700">
                 날짜
               </label>
-              <input
+              <BaseInput
                 type="date"
                 max={"9999-12-31"}
                 value={formData.date}
                 onChange={(e) =>
                   setFormData({ ...formData, date: e.target.value })
                 }
-                className="w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500"
               />
             </div>
             <div>
@@ -80,7 +79,7 @@ const EventFormModal: FC<EventFormModalProps> = ({
                 onChange={(e) =>
                   setFormData({ ...formData, description: e.target.value })
                 }
-                className="w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+                className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:ring-inset"
                 rows={3}
                 placeholder="일정 설명 (선택사항)"
               />
