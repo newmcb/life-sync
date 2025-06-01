@@ -6,11 +6,11 @@ import { Filters, Transaction } from "@/src/views/finance/model/FinanceModel";
 import {
   ExpenseChart,
   FinanceSummary,
-  FloatingActionButton,
   TransactionFilters,
   TransactionFormModal,
   TransactionList,
 } from "@/src/features/finance";
+import FloatingActionButton from "@/src/shared/ui/FloatingActionButton";
 
 const FinanceView = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
