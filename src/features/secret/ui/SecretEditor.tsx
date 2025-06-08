@@ -84,7 +84,7 @@ const SecretEditor: FC<SecretEditorProps> = ({
           <div className="h-[50vh] md:h-[calc(100vh-400px)]">
             <Editor
               key={editorKey}
-              apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
+              apiKey={process.env.TINYMCE_API_KEY}
               value={draftContent}
               onEditorChange={(content) => setDraftContent(content)}
               init={{
