@@ -196,15 +196,15 @@ const TodoView = () => {
           deleteTodo(todoId);
         }}
       />
-
-      <TodoForm
-        visible={showTodoForm}
-        todo={selectedTodo!}
-        onSave={handleSave}
-        onClose={() => {
-          setShowTodoForm(false);
-        }}
-      />
+      {showTodoForm && (
+        <TodoForm
+          todo={selectedTodo!}
+          onSave={handleSave}
+          onClose={() => {
+            setShowTodoForm(false);
+          }}
+        />
+      )}
     </div>
   );
 };

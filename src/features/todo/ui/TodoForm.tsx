@@ -4,7 +4,6 @@ import dayjs from "dayjs";
 import BaseInput from "@/src/shared/ui/Input";
 
 interface TodoFormProps {
-  visible: boolean;
   todo: Todo;
   onSave: (todo: Todo) => void;
   onClose: () => void;
@@ -20,15 +19,13 @@ const categoryOptions = [
   "기타",
 ];
 
-const TodoForm: FC<TodoFormProps> = ({ visible, todo, onSave, onClose }) => {
+const TodoForm: FC<TodoFormProps> = ({ todo, onSave, onClose }) => {
   const [formData, setFormData] = useState({
-    title: todo.title ?? "",
-    dueDate: todo.dueDate ? dayjs(todo.dueDate).format("YYYY-MM-DD") : "",
-    priority: todo.priority ?? "medium",
-    category: todo.category ?? "",
+    title: todo?.title || "",
+    dueDate: todo?.dueDate ? dayjs(todo.dueDate).format("YYYY-MM-DD") : "",
+    priority: todo?.priority || "medium",
+    category: todo?.category || "",
   });
-
-  if (!visible) return null;
 
   const handleSubmit = () => {
     onSave({

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import BaseInput from "@/src/shared/ui/Input";
 
@@ -36,13 +36,18 @@ export default function TransactionFilters({
   const [startDate, setStartDate] = useState(defaultStartDate);
   const [endDate, setEndDate] = useState(defaultEndDate);
 
-  const handleFilterChange = useCallback(() => {
-    onFilterChange({ type, category, startDate, endDate });
-  }, [onFilterChange, type, category, startDate, endDate]);
+  const handleFilterChange = () => {
+    onFilterChange({
+      type,
+      category,
+      startDate,
+      endDate,
+    });
+  };
 
   useEffect(() => {
     handleFilterChange();
-  }, [handleFilterChange]);
+  }, [type, category, startDate, endDate]);
 
   return (
     <div>
