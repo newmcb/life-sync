@@ -14,8 +14,15 @@ const config = {
   },
   plugins: ["@typescript-eslint"],
   rules: {
-    "@typescript-eslint/no-unused-vars": ["error"],
-    "react/react-in-jsx-scope": "off"
+    "@typescript-eslint/no-unused-vars": ["warn", {
+      "vars": "all", // 모든 변수 체크
+      "args": "after-used", // 사용되지 않는 매개변수 감지 (마지막부터)
+      "ignoreRestSiblings": true, // 구조분해에서 나머지 요소 무시
+      "argsIgnorePattern": "^_", // `_`로 시작하면 사용되지 않아도 허용
+      "varsIgnorePattern": "^_" // 변수도 `_`로 시작하면 허용
+    }],
+    "react/react-in-jsx-scope": "off",
+
   },
 };
 
