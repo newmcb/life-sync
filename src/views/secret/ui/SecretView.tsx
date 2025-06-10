@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
 
 import { SecretItem } from "@/src/views/secret/model/SecretModel";
 import {
@@ -14,7 +13,7 @@ import FloatingActionButton from "@/src/shared/ui/FloatingActionButton";
 import SecretCreateModal from "../../../features/secret/ui/SecretCreateModal";
 
 const SecretView = () => {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
   const [items, setItems] = useState<SecretItem[]>([]);
   const [currentPath, setCurrentPath] = useState<string[]>([]);
   const [selectedItem, setSelectedItem] = useState<SecretItem | null>(null);
@@ -133,23 +132,23 @@ const SecretView = () => {
     setSelectedItem(null);
   };
 
-  const navigateUp = () => {
-    setCurrentPath(currentPath.slice(0, -1));
-    setSelectedItem(null);
-  };
+  // const navigateUp = () => {
+  //   setCurrentPath(currentPath.slice(0, -1));
+  //   setSelectedItem(null);
+  // };
 
-  const filteredItems = getCurrentItems().filter((item) =>
-    item.name.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
-
-  // 에디터 내용 변경 시 아이템 업데이트
-  const handleEditorChange = (content: string) => {
-    setEditorContent(content);
-    if (selectedItem) {
-      const updatedItem = { ...selectedItem, content };
-      updateItem(updatedItem);
-    }
-  };
+  // const filteredItems = getCurrentItems().filter((item) =>
+  //   item.name.toLowerCase().includes(searchQuery.toLowerCase()),
+  // );
+  //
+  // // 에디터 내용 변경 시 아이템 업데이트
+  // const handleEditorChange = (content: string) => {
+  //   setEditorContent(content);
+  //   if (selectedItem) {
+  //     const updatedItem = { ...selectedItem, content };
+  //     updateItem(updatedItem);
+  //   }
+  // };
 
   // 메모 선택 시 호출되는 함수
   const selectMemo = (item: SecretItem) => {
@@ -191,7 +190,7 @@ const SecretView = () => {
               isEditing={isEditing}
               setIsEditing={setIsEditing}
               editorContent={editorContent}
-              handleEditorChange={handleEditorChange}
+              // handleEditorChange={handleEditorChange}
               updateItem={updateItem}
               editorKey={editorKey}
               setEditorContent={setEditorContent}

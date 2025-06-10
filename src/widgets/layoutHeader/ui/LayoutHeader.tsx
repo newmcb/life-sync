@@ -31,7 +31,7 @@ const LayoutHeader: FC<LayoutHeaderProps> = ({ onSelectionChange }) => {
                     onSelectionChange(v.key);
                     handleRoute(v.to);
                   }}
-                  className="text-gray-700 hover:text-black hover:font-bold cursor-pointer"
+                  className="text-gray-700 hover:text-black hover:font-bold cursor-pointer transition-all duration-200"
                 >
                   {v.ko}
                 </div>
@@ -40,11 +40,37 @@ const LayoutHeader: FC<LayoutHeaderProps> = ({ onSelectionChange }) => {
           </nav>
         </div>
         <div className="flex items-center space-x-6">
-          <button className="text-gray-700 hover:text-black hover:font-bold">
-            Search
+          <button className="text-gray-700 hover:text-black hover:font-bold transition-all duration-200">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
           </button>
-          <button className="text-gray-700 hover:text-black hover:font-bold">
-            Login
+          <button className="text-gray-700 hover:text-black hover:font-bold transition-all duration-200">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+              />
+            </svg>
           </button>
         </div>
       </div>

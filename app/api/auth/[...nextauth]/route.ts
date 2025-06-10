@@ -12,7 +12,7 @@ const handler = NextAuth({
     signIn: "/",
   },
   callbacks: {
-    async redirect({ url, baseUrl }) {
+    async redirect({ baseUrl }) {
       // 로그인 후 /dashboard로 리디렉션
       return `${baseUrl}/dashboard`;
     },

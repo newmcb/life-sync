@@ -1,9 +1,5 @@
 import React, { FC, useState } from "react";
-import {
-  PRIORITY_OPTIONS,
-  PriorityFilter,
-  Todo,
-} from "@/src/features/todo/model/TodoType";
+import { PRIORITY_OPTIONS, Todo } from "@/src/features/todo/model/TodoType";
 import dayjs from "dayjs";
 import BaseInput from "@/src/shared/ui/Input";
 
@@ -25,14 +21,14 @@ const categoryOptions = [
 ];
 
 const TodoForm: FC<TodoFormProps> = ({ visible, todo, onSave, onClose }) => {
-  if (!visible) return null;
-
   const [formData, setFormData] = useState({
-    title: todo?.title || "",
-    dueDate: todo?.dueDate ? dayjs(todo.dueDate).format("YYYY-MM-DD") : "",
-    priority: todo?.priority || "medium",
-    category: todo?.category || "",
+    title: todo.title ?? "",
+    dueDate: todo.dueDate ? dayjs(todo.dueDate).format("YYYY-MM-DD") : "",
+    priority: todo.priority ?? "medium",
+    category: todo.category ?? "",
   });
+
+  if (!visible) return null;
 
   const handleSubmit = () => {
     onSave({

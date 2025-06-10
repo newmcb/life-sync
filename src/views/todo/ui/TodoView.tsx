@@ -31,7 +31,7 @@ const DEFAULT_FORM = {
 };
 
 const TodoView = () => {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const router = useRouter();
   const [todos, setTodos] = useState<Todo[]>([]);
   const [showTodoForm, setShowTodoForm] = useState(false);
@@ -70,6 +70,7 @@ const TodoView = () => {
       });
     }
     setShowTodoForm(true);
+    console.log("formData", formData);
   };
 
   // 할일 저장

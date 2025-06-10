@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import BaseInput from "@/src/shared/ui/Input";
 
 interface Transaction {

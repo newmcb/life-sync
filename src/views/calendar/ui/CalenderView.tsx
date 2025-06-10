@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import dayjs from "dayjs";
 import { CalendarEvent } from "@/src/views/calendar/model/CalendarViewModel";
-import { FaEllipsisH, FaPlus } from "react-icons/fa";
+import { FaEllipsisH } from "react-icons/fa";
 import { PageLoading } from "@/src/widgets/common";
 import CalendarHeader from "@/src/views/calendar/ui/CalendarHeader";
 
@@ -19,7 +19,7 @@ import {
 import { CalendarFilterType } from "@/src/features/calendar/model/CalendarModel";
 
 const CalenderView = () => {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const router = useRouter();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [events, setEvents] = useState<CalendarEvent[]>([]);
@@ -37,6 +37,32 @@ const CalenderView = () => {
     description: "",
     color: "bg-blue-500",
   });
+
+  // 필터링된 일정 목록 가져오기
+  const filteredEvents = useMemo(() => {
+    let filtered = [...events];
+
+    // 지난 일정 필터링
+    if (!showPastEvents) {
+      filtered = filtered.filter(
+        (event) => !dayjs(event.date).isBefore(dayjs(), "day"),
+      );
+    }
+
+    // 필터 타입에 따른 필터링
+    if (filterType === "day" && selectedDate) {
+      filtered = filtered.filter((event) =>
+        dayjs(event.date).isSame(selectedDate, "day"),
+      );
+    } else if (filterType === "month") {
+      filtered = filtered.filter((event) =>
+        dayjs(event.date).isSame(currentDate, "month"),
+      );
+    }
+
+    // 날짜순 정렬
+    return filtered.sort((a, b) => a.date.getTime() - b.date.getTime());
+  }, [events, filterType, selectedDate, currentDate, showPastEvents]);
 
   // 인증 확인
   if (status === "loading") {
@@ -131,32 +157,6 @@ const CalenderView = () => {
   const deleteEvent = (id: string) => {
     setEvents(events.filter((event) => event.id !== id));
   };
-
-  // 필터링된 일정 목록 가져오기
-  const filteredEvents = useMemo(() => {
-    let filtered = [...events];
-
-    // 지난 일정 필터링
-    if (!showPastEvents) {
-      filtered = filtered.filter(
-        (event) => !dayjs(event.date).isBefore(dayjs(), "day"),
-      );
-    }
-
-    // 필터 타입에 따른 필터링
-    if (filterType === "day" && selectedDate) {
-      filtered = filtered.filter((event) =>
-        dayjs(event.date).isSame(selectedDate, "day"),
-      );
-    } else if (filterType === "month") {
-      filtered = filtered.filter((event) =>
-        dayjs(event.date).isSame(currentDate, "month"),
-      );
-    }
-
-    // 날짜순 정렬
-    return filtered.sort((a, b) => a.date.getTime() - b.date.getTime());
-  }, [events, filterType, selectedDate, currentDate, showPastEvents]);
 
   // 현재 필터 상태에 따른 제목 가져오기
   const getFilterTitle = () => {

@@ -16,12 +16,12 @@ const SecretBreadcrumb: FC<SecretBreadcrumbProps> = ({
 }) => {
   const getBreadcrumbs = () => {
     const breadcrumbs = [{ id: null as string | null, name: "메인" }];
-    let currentId = null as string | null;
+    // let currentId = null as string | null;
     for (const id of currentPath) {
       const item = items.find((item) => item.id === id);
       if (item) {
         breadcrumbs.push({ id: item.id, name: item.name });
-        currentId = item.id;
+        // currentId = item.id;
       }
     }
     return breadcrumbs;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import dayjs from "dayjs";
 import BaseInput from "@/src/shared/ui/Input";
 
@@ -36,18 +36,13 @@ export default function TransactionFilters({
   const [startDate, setStartDate] = useState(defaultStartDate);
   const [endDate, setEndDate] = useState(defaultEndDate);
 
-  const handleFilterChange = () => {
-    onFilterChange({
-      type,
-      category,
-      startDate,
-      endDate,
-    });
-  };
+  const handleFilterChange = useCallback(() => {
+    onFilterChange({ type, category, startDate, endDate });
+  }, [onFilterChange, type, category, startDate, endDate]);
 
   useEffect(() => {
     handleFilterChange();
-  }, [type, category, startDate, endDate]);
+  }, [handleFilterChange]);
 
   return (
     <div>
@@ -61,7 +56,6 @@ export default function TransactionFilters({
             value={type}
             onChange={(e) => {
               setType(e.target.value as "all" | "income" | "expense");
-              handleFilterChange();
             }}
             className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:ring-inset"
           >
@@ -79,7 +73,6 @@ export default function TransactionFilters({
             value={category}
             onChange={(e) => {
               setCategory(e.target.value);
-              handleFilterChange();
             }}
             className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:ring-inset"
           >

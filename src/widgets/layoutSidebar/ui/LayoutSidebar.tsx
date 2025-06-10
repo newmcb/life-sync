@@ -9,7 +9,7 @@ interface LayoutSidebarProps {
   selectHeader?: string;
 }
 
-const LayoutSidebar: FC<LayoutSidebarProps> = ({ selectHeader }) => {
+const LayoutSidebar: FC<LayoutSidebarProps> = () => {
   const pathname = usePathname();
   const router = useRouter();
   const { data: session, status } = useSession();

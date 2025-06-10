@@ -2,7 +2,6 @@ import React, { FC, useCallback, useEffect, useState } from "react";
 import {
   INCOME_DATA,
   EXPENSE_DATA,
-  TEST_DATA,
 } from "@/src/entities/calendar/model/CalendarModel";
 import {
   CATEGORY_INCOME,

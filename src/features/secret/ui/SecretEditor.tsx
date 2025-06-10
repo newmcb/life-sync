@@ -8,7 +8,7 @@ interface SecretEditorProps {
   isEditing: boolean;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
   editorContent: string;
-  handleEditorChange: (content: string) => void;
+  // handleEditorChange: (content: string) => void;
   updateItem: (item: SecretItem) => void;
   editorKey: number;
   setEditorContent: React.Dispatch<React.SetStateAction<string>>;
@@ -20,7 +20,7 @@ const SecretEditor: FC<SecretEditorProps> = ({
   isEditing,
   setIsEditing,
   editorContent,
-  handleEditorChange,
+  // handleEditorChange,
   updateItem,
   editorKey,
   setEditorContent,
@@ -30,7 +30,7 @@ const SecretEditor: FC<SecretEditorProps> = ({
 
   useEffect(() => {
     setDraftContent(editorContent);
-  }, [editorKey]);
+  }, [editorKey, editorContent]);
 
   if (!selectedItem || selectedItem.type !== "memo") {
     return (

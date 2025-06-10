@@ -10,6 +10,7 @@ import {
   Tooltip,
   Legend,
   ArcElement,
+  TooltipItem,
 } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import dayjs from "dayjs";
@@ -157,9 +158,9 @@ export default function ExpenseChart({ transactions }: ExpenseChartProps) {
       },
       tooltip: {
         callbacks: {
-          label: function (context: any) {
+          label: function (context: TooltipItem<"pie">) {
             const label = context.dataset.label || "";
-            const value = context.raw || 0;
+            const value = context.raw as number;
             const percentage =
               context.dataset.label === "수입"
                 ? chartData.incomePercentages[context.dataIndex]
