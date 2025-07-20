@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { SessionProvider, useSession } from "next-auth/react";
 import { ReactNode, useEffect, useState } from "react";
 import { LayoutSidebar } from "@/src/widgets/layoutSidebar";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -61,6 +62,7 @@ export default function RootLayout({
                 {children}
               </main>
             </div>
+            <Analytics />
           </AuthCheck>
         </SessionProvider>
       </body>
