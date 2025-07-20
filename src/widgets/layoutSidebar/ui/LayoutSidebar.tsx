@@ -126,7 +126,7 @@ const LayoutSidebar: FC<LayoutSidebarProps> = () => {
                     {session?.user?.name || session?.user?.email || "사용자"}
                   </p>
                   <p className="text-xs text-gray-500 overflow-hidden">
-                    {session?.user?.email || ""}
+                    {session?.user?.email || "환영합니다"}
                   </p>
                 </div>
               </div>

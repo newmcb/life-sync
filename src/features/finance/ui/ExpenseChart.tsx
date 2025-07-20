@@ -14,6 +14,7 @@ import {
 } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import dayjs from "dayjs";
+import { Transaction } from "@/src/views/finance/model/FinanceModel";
 
 ChartJS.register(
   CategoryScale,
@@ -24,14 +25,6 @@ ChartJS.register(
   Legend,
   ArcElement,
 );
-
-interface Transaction {
-  id: string;
-  amount: number;
-  category: string;
-  date: string;
-  description: string;
-}
 
 interface ExpenseChartProps {
   transactions: Transaction[];

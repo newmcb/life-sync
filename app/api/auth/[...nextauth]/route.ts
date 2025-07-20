@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 const handler = NextAuth({
   providers: [
@@ -7,13 +8,27 @@ const handler = NextAuth({
       clientId: process.env.GOOGLE_CLIENT_ID || "",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     }),
+
+    CredentialsProvider({
+      id: "guest",
+      name: "게스트 방문",
+      credentials: {},
+
+      async authorize() {
+        return {
+          id: "guest",
+          name: "게스트",
+          email: "",
+          image: "",
+        };
+      },
+    }),
   ],
   pages: {
     signIn: "/",
   },
   callbacks: {
     async redirect({ baseUrl }) {
-      // 로그인 후 /dashboard로 리디렉션
       return `${baseUrl}/dashboard`;
     },
     async jwt({ token, user }) {
@@ -29,10 +44,10 @@ const handler = NextAuth({
     async session({ session, token }) {
       // 세션에 사용자 정보 추가
       if (token) {
-        session.user.id = token.id;
-        session.user.name = token.name;
-        session.user.email = token.email;
-        session.user.image = token.image;
+        session.user.id = token.id as string;
+        session.user.name = token.name as string;
+        session.user.email = token.email as string;
+        session.user.image = token.image as string | null;
       }
       return session;
     },

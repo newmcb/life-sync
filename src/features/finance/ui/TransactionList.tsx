@@ -2,14 +2,7 @@
 
 import { useState } from "react";
 import BaseInput from "@/src/shared/ui/Input";
-
-interface Transaction {
-  id: string;
-  amount: number;
-  category: string;
-  date: string;
-  description: string;
-}
+import { Transaction } from "@/src/views/finance/model/FinanceModel";
 
 interface TransactionListProps {
   transactions: Transaction[];

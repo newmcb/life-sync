@@ -5,8 +5,8 @@ export interface Todo {
   id: string;
   title: string;
   completed: boolean;
-  dueDate?: Date;
-  priority: "low" | "medium" | "high";
+  // dueDate?: Date | string;
+  priority: Exclude<PriorityFilter, "all">;
   category?: string;
   createdAt: Date;
 }

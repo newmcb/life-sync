@@ -16,16 +16,16 @@ import { PageLoading } from "@/src/widgets/common";
 import {
   PRIORITY_OPTIONS,
   PriorityFilter,
-  Todo,
   TodoType,
+  Todo,
 } from "@/src/features/todo/model/TodoType";
+import { useTodos } from "@/hooks/useTodos";
 
 // dayjs 한국어 로케일 설정
 dayjs.locale("ko");
 
 const DEFAULT_FORM = {
   title: "",
-  dueDate: "",
   priority: "medium",
   category: "",
 };
@@ -33,7 +33,7 @@ const DEFAULT_FORM = {
 const TodoView = () => {
   const { status } = useSession();
   const router = useRouter();
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const { todos, addTodo, updateTodo, deleteTodo } = useTodos();
   const [showTodoForm, setShowTodoForm] = useState(false);
   const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
   const [filterType, setFilterType] = useState<TodoType>("all");
@@ -42,106 +42,77 @@ const TodoView = () => {
   const [showFilterMenu, setShowFilterMenu] = useState(false);
   const [formData, setFormData] = useState(DEFAULT_FORM);
 
+  // 인증 확인
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/");
     }
   }, [status, router]);
 
-  // 인증 확인
-
-  // 할일 추가/수정 폼 열기
+  // 폼 열기
   const openTodoForm = (todo?: Todo) => {
     if (todo) {
       setSelectedTodo(todo);
       setFormData({
         title: todo.title,
-        dueDate: todo.dueDate ? dayjs(todo.dueDate).format("YYYY-MM-DD") : "",
         priority: todo.priority,
         category: todo.category || "",
       });
     } else {
       setSelectedTodo(null);
-      setFormData({
-        title: "",
-        dueDate: "",
-        priority: "medium",
-        category: "",
-      });
+      setFormData(DEFAULT_FORM);
     }
     setShowTodoForm(true);
-    console.log("formData", formData);
   };
 
-  // 할일 저장
+  // 저장
   const handleSave = (todo: Todo) => {
     if (todo.id) {
-      setTodos((prev) => prev.map((t) => (t.id === todo.id ? todo : t)));
+      updateTodo(todo);
     } else {
-      const newTodo: Todo = {
+      addTodo({
         ...todo,
         id: Date.now().toString(),
         createdAt: new Date(),
-      };
-      setTodos((prev) => [...prev, newTodo]);
+      });
     }
     setShowTodoForm(false);
   };
 
-  // 할일 삭제
-  const deleteTodo = (id: string) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
-  };
-
-  // 할일 완료 상태 토글
-  const toggleTodoComplete = (id: string) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo,
-      ),
-    );
-  };
-
-  // 필터링된 할일 목록 가져오기
+  // 필터링
   const filteredTodos = todos.filter((todo) => {
-    // 완료 상태 필터링
     if (filterType === "active" && todo.completed) return false;
     if (filterType === "completed" && !todo.completed) return false;
-
-    // 우선순위 필터링
     if (priorityFilter !== "all" && todo.priority !== priorityFilter)
       return false;
-
-    // 카테고리 필터링
     if (categoryFilter !== "all" && todo.category !== categoryFilter)
       return false;
-
     return true;
   });
 
-  // 필터 메뉴 토글 핸들러
-  const toggleFilterMenu = () => {
-    setShowFilterMenu(!showFilterMenu);
-  };
+  const toggleFilterMenu = () => setShowFilterMenu((prev) => !prev);
 
-  // 현재 필터 상태에 따른 제목 가져오기
   const getFilterTitle = () => {
-    let title = "";
-
-    if (filterType === "all") title = "전체 할일";
-    else if (filterType === "active") title = "진행 중인 할일";
-    else if (filterType === "completed") title = "완료된 할일";
-
+    let title =
+      filterType === "all"
+        ? "전체 할일"
+        : filterType === "active"
+          ? "진행 중인 할일"
+          : "완료된 할일";
     if (priorityFilter !== "all") {
-      const priority = PRIORITY_OPTIONS.find((p) => p.value === priorityFilter);
-      title += ` (${priority?.name || ""} 우선순위)`;
+      const p = PRIORITY_OPTIONS.find((p) => p.value === priorityFilter);
+      title += ` (${p?.name} 우선순위)`;
     }
-
     if (categoryFilter !== "all") {
       title += ` (${categoryFilter} 카테고리)`;
     }
-
     return title;
+  };
+
+  const handleToggle = (id: string) => {
+    const t = todos.find((x) => x.id === id);
+    if (!t) return;
+    updateTodo({ ...t, completed: !t.completed });
   };
 
   if (status === "loading") {
@@ -150,59 +121,41 @@ const TodoView = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <TodoHeader
-        onAdd={() => {
-          openTodoForm();
-        }}
-      />
+      <TodoHeader onAdd={() => openTodoForm()} />
 
-      {/* 필터 표시 (모바일/데스크톱 공통) */}
-      <div className="mb-4 p-2 bg-indigo-50 rounded-md">
-        <div className="flex items-center justify-between">
-          <span className="text-sm font-medium text-indigo-700">
-            {getFilterTitle()}
-          </span>
-          <button
-            onClick={toggleFilterMenu}
-            className="p-2 text-indigo-600 hover:bg-indigo-100 rounded-md"
-          >
-            <FaEllipsisH />
-          </button>
-        </div>
+      <div className="mb-4 p-2 bg-indigo-50 rounded-md flex items-center justify-between">
+        <span className="text-sm font-medium text-indigo-700">
+          {getFilterTitle()}
+        </span>
+        <button
+          onClick={toggleFilterMenu}
+          className="p-2 text-indigo-600 hover:bg-indigo-100 rounded-md"
+        >
+          <FaEllipsisH />
+        </button>
       </div>
 
-      {/* 필터 메뉴 드롭다운 */}
       <FilterMenu
         visible={showFilterMenu}
         filterType={filterType}
         priorityFilter={priorityFilter}
         categoryFilter={categoryFilter}
         onFilterChange={{ setFilterType, setPriorityFilter, setCategoryFilter }}
-        onClose={() => {
-          setShowFilterMenu(false);
-        }}
+        onClose={() => setShowFilterMenu(false)}
       />
 
-      {/* 할일 목록 */}
       <TodoList
         filteredTodos={filteredTodos}
-        onToggle={(id) => {
-          toggleTodoComplete(id);
-        }}
-        onEdit={(todo) => {
-          openTodoForm(todo);
-        }}
-        onDelete={(todoId) => {
-          deleteTodo(todoId);
-        }}
+        onToggle={handleToggle}
+        onEdit={openTodoForm}
+        onDelete={(id) => deleteTodo(id)}
       />
+
       {showTodoForm && (
         <TodoForm
           todo={selectedTodo!}
           onSave={handleSave}
-          onClose={() => {
-            setShowTodoForm(false);
-          }}
+          onClose={() => setShowTodoForm(false)}
         />
       )}
     </div>
