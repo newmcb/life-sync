@@ -1,6 +1,5 @@
 import React, { FC, useState } from "react";
 import { PRIORITY_OPTIONS, Todo } from "@/src/features/todo/model/TodoType";
-import dayjs from "dayjs";
 import BaseInput from "@/src/shared/ui/Input";
 
 interface TodoFormProps {

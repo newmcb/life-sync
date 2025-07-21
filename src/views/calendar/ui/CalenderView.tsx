@@ -39,12 +39,6 @@ const CalendarView = () => {
     color: "bg-blue-500",
   });
 
-  if (status === "loading") return <PageLoading />;
-  if (status === "unauthenticated") {
-    router.push("/");
-    return null;
-  }
-
   // 필터링 & 정렬
   const filteredEvents = useMemo(() => {
     let filtered = [...events];
@@ -65,6 +59,12 @@ const CalendarView = () => {
     // Date 객체 보장 → getTime 안전
     return filtered.sort((a, b) => a.date.getTime() - b.date.getTime());
   }, [events, filterType, selectedDate, currentDate, showPastEvents]);
+
+  if (status === "loading") return <PageLoading />;
+  if (status === "unauthenticated") {
+    router.push("/");
+    return null;
+  }
 
   // 네비게이션 핸들러
   const prevMonth = () => {

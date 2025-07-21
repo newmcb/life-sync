@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import { FaCheck, FaEdit, FaTrash } from "react-icons/fa";
-import dayjs from "dayjs";
 import { Todo } from "@/src/features/todo/model/TodoType";
 
 interface TodoListProps {
