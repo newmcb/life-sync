@@ -24,12 +24,6 @@ import { useTodos } from "@/hooks/useTodos";
 // dayjs 한국어 로케일 설정
 dayjs.locale("ko");
 
-const DEFAULT_FORM = {
-  title: "",
-  priority: "medium",
-  category: "",
-};
-
 const TodoView = () => {
   const { status } = useSession();
   const router = useRouter();
@@ -40,7 +34,6 @@ const TodoView = () => {
   const [priorityFilter, setPriorityFilter] = useState<PriorityFilter>("all");
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
   const [showFilterMenu, setShowFilterMenu] = useState(false);
-  const [formData, setFormData] = useState(DEFAULT_FORM);
 
   // 인증 확인
   useEffect(() => {
@@ -51,17 +44,7 @@ const TodoView = () => {
 
   // 폼 열기
   const openTodoForm = (todo?: Todo) => {
-    if (todo) {
-      setSelectedTodo(todo);
-      setFormData({
-        title: todo.title,
-        priority: todo.priority,
-        category: todo.category || "",
-      });
-    } else {
-      setSelectedTodo(null);
-      setFormData(DEFAULT_FORM);
-    }
+    setSelectedTodo(todo ?? null);
     setShowTodoForm(true);
   };
 
