@@ -65,22 +65,12 @@ const TodoList: FC<TodoListProps> = ({
                       {todo.title}
                     </h3>
                     <div className="flex flex-wrap gap-2 mt-1">
-                      {todo.dueDate && (
+                      <span className="flex items-center space-x-1 text-xs">
                         <span
-                          className={`text-xs px-2 py-1 rounded-full ${
-                            dayjs(todo.dueDate).isBefore(dayjs(), "day") &&
-                            !todo.completed
-                              ? "bg-red-100 text-red-800"
-                              : "bg-gray-100 text-gray-800"
-                          }`}
+                          className={`px-2 py-1 rounded-full ${priority?.color} bg-opacity-20 ${priority?.color.replace("bg-", "text-")}`}
                         >
-                          {dayjs(todo.dueDate).format("YYYY년 M월 D일")}
+                          {priority?.name}
                         </span>
-                      )}
-                      <span
-                        className={`text-xs px-2 py-1 rounded-full ${priority?.color.replace("bg-", "bg-opacity-20 text-")}`}
-                      >
-                        {priority?.name} 우선순위
                       </span>
                       {todo.category && (
                         <span className="text-xs px-2 py-1 rounded-full bg-indigo-100 text-indigo-800">

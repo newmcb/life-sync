@@ -2,9 +2,11 @@
 
 import React, { useState } from "react";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { FaGoogle } from "react-icons/fa";
 
 const LoginFormFeature = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -22,8 +24,25 @@ const LoginFormFeature = () => {
         setError("로그인에 실패했습니다. 다시 시도해주세요.");
         return;
       }
-    } catch (error) {
+    } catch {
       setError("로그인 중 오류가 발생했습니다.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGuestLogin = async () => {
+    try {
+      setIsLoading(true);
+      setError("");
+
+      // "guest" 프로바이더로 signIn
+      await signIn("guest", {
+        redirect: true,
+        callbackUrl: "/dashboard",
+      });
+    } catch {
+      setError("게스트 접근 중 오류가 발생했습니다.");
     } finally {
       setIsLoading(false);
     }
@@ -52,6 +71,14 @@ const LoginFormFeature = () => {
         >
           <FaGoogle className="w-5 h-5 mr-2 text-red-500" />
           Google로 계속하기
+        </button>
+
+        {/* 게스트 버튼 */}
+        <button
+          onClick={handleGuestLogin}
+          className="w-full mt-4 flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          게스트로 계속하기
         </button>
 
         <div className="mt-6">

@@ -11,6 +11,7 @@ interface EventFormModalProps {
   formData: {
     title: string;
     date: string;
+    time: string;
     description: string;
     color: string;
   };
@@ -18,6 +19,7 @@ interface EventFormModalProps {
     SetStateAction<{
       title: string;
       date: string;
+      time: string;
       description: string;
       color: string;
     }>
@@ -67,6 +69,18 @@ const EventFormModal: FC<EventFormModalProps> = ({
                 value={formData.date}
                 onChange={(e) =>
                   setFormData({ ...formData, date: e.target.value })
+                }
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                시간
+              </label>
+              <BaseInput
+                type="time"
+                value={formData.time}
+                onChange={(e) =>
+                  setFormData({ ...formData, time: e.target.value })
                 }
               />
             </div>

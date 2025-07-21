@@ -2,14 +2,7 @@
 
 import { useMemo } from "react";
 import dayjs from "dayjs";
-
-interface Transaction {
-  id: string;
-  amount: number;
-  category: string;
-  date: string;
-  description: string;
-}
+import { Transaction } from "@/src/views/finance/model/FinanceModel";
 
 interface FinanceSummaryProps {
   transactions: Transaction[];

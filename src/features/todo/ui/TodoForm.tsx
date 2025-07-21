@@ -22,7 +22,7 @@ const categoryOptions = [
 const TodoForm: FC<TodoFormProps> = ({ todo, onSave, onClose }) => {
   const [formData, setFormData] = useState({
     title: todo?.title || "",
-    dueDate: todo?.dueDate ? dayjs(todo.dueDate).format("YYYY-MM-DD") : "",
+    // dueDate: todo?.dueDate ? dayjs(todo.dueDate).format("YYYY-MM-DD") : "",
     priority: todo?.priority || "medium",
     category: todo?.category || "",
   });
@@ -32,7 +32,7 @@ const TodoForm: FC<TodoFormProps> = ({ todo, onSave, onClose }) => {
       id: todo?.id || "",
       title: formData.title,
       completed: todo?.completed || false,
-      dueDate: formData.dueDate ? new Date(formData.dueDate) : undefined,
+      // dueDate: formData.dueDate ? new Date(formData.dueDate) : undefined,
       priority: formData.priority as "low" | "medium" | "high",
       category: formData.category || undefined,
       createdAt: todo?.createdAt || new Date(),
@@ -60,19 +60,19 @@ const TodoForm: FC<TodoFormProps> = ({ todo, onSave, onClose }) => {
                 placeholder="할일 제목"
               />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                마감일
-              </label>
-              <BaseInput
-                type="date"
-                max={"9999-12-31"}
-                value={formData.dueDate}
-                onChange={(e) =>
-                  setFormData({ ...formData, dueDate: e.target.value })
-                }
-              />
-            </div>
+            {/*<div>*/}
+            {/*  <label className="block text-sm font-medium text-gray-700 mb-1">*/}
+            {/*    마감일*/}
+            {/*  </label>*/}
+            {/*  <BaseInput*/}
+            {/*    type="date"*/}
+            {/*    max={"9999-12-31"}*/}
+            {/*    value={formData.dueDate}*/}
+            {/*    onChange={(e) =>*/}
+            {/*      setFormData({ ...formData, dueDate: e.target.value })*/}
+            {/*    }*/}
+            {/*  />*/}
+            {/*</div>*/}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 우선순위
