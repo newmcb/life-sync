@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: "Life Sync – 일상 관리를 혁신하다",
     description:
       "Life Sync로 업무·일정·재무를 한눈에, 효율적으로 관리해 보세요!",
-    url: "https://life-sync-khaki.vercel.app/dashboard", // 실제 배포된 주소로 바꿔주세요
+    url: "https://life-sync-khaki.vercel.app/dashboard",
     type: "website",
     images: [
       {
