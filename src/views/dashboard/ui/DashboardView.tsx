@@ -14,9 +14,9 @@ const DashboardView = () => {
   const { events } = useCalendar();
   const { transactions } = useFinance();
 
-  const todayEvents = events.filter((e) =>
-    dayjs(e.date).isSame(dayjs(), "day"),
-  );
+  const todayEvents = events
+    .filter((e) => dayjs(e.date).isSame(dayjs(), "day"))
+    .sort((a, b) => dayjs(a.date).diff(dayjs(b.date)));
 
   const thisMonthTxs = transactions.filter((t) =>
     dayjs(t.date).isSame(dayjs(), "month"),
