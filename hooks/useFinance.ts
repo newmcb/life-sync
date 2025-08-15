@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import type { Transaction } from "@/src/views/finance/model/FinanceModel";
-import { guestFinanceSummary } from "@/data/sampleData";
+import dayjs from "dayjs";
 
 const STORAGE_KEY = "userTransactions";
 
@@ -16,8 +16,17 @@ export function useFinance() {
     fetch("/api/guest")
       .then((res) => res.json())
       .then(({ finance: sample }) => {
-        setTransactions(sample);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(sample));
+        const newData = sample.map(
+          (data: { id: string; date: string; amount: number }) => {
+            return {
+              ...data,
+              date: dayjs().startOf("month").format("YYYY-MM-DD"),
+            };
+          },
+        );
+
+        setTransactions(newData);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(newData));
       })
       .catch(() => {
         // 실패해도 빈 배열

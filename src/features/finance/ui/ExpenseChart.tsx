@@ -31,8 +31,6 @@ interface ExpenseChartProps {
 }
 
 export default function ExpenseChart({ transactions }: ExpenseChartProps) {
-  console.log(">>>>> transactions", transactions);
-
   const chartData = useMemo(() => {
     const now = dayjs();
 
