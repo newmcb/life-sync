@@ -10,7 +10,6 @@ const LayoutHeader: FC<LayoutHeaderProps> = ({ onSelectionChange }) => {
   const router = useRouter();
 
   const handleRoute = (value: string) => {
-    console.log(">>> value", value);
     router.push(value);
   };
 
